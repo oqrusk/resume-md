@@ -1,0 +1,6 @@
+.row
+  .col-sm6
+    #editor
+      textarea#input(:value="input" @input="update")
+  .col-sm6
+    #preview(v-html="compiledMarkdown")

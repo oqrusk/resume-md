@@ -1,27 +1,44 @@
 <template lang="pug" src="./Editor.pug">
-
 </template>
 
 <script>
 import marked from 'marked';
 import _ from 'lodash';
 
+// localStorage persistence
+const STORAGE_KEY = 'md-resume-text';
+const defaultText = '# bjljbljhgHello!! ';
+
+const resumeStorage = {
+  fetch: () => {
+    const resumeText = localStorage.getItem(STORAGE_KEY) || defaultText;
+    console.log(`fetch: ${resumeText}`);
+    return resumeText;
+  },
+  save: (resumeText) => {
+    console.log(`save: ${resumeText}`);
+    localStorage.setItem(STORAGE_KEY, resumeText);
+  },
+};
+
 export default {
   name: 'editor',
   data() {
     return {
-      input: '# Hello!!',
+      input: resumeStorage.fetch(),
     };
   },
-  self: this,
   computed: {
     compiledMarkdown() {
+      console.log(`compiled: ${this.input}`);
       return marked(this.input, { sanitize: true });
     },
   },
   methods: {
     update: _.debounce(function (e) {
       this.input = e.target.value;
+      console.log(`update: ${this.input}`);
+      resumeStorage.save(this.input);
     }, 300),
   },
 };

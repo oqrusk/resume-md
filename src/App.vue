@@ -3,7 +3,7 @@
 
 <script>
 import Hello from './components/Hello';
-import Editor from './components/edit/Editor';
+import Editor from './views/edit/Editor';
 
 export default {
   name: 'app',
@@ -11,10 +11,15 @@ export default {
     Hello,
     Editor,
   },
+  data() {
+    return {
+      path: '....Hello!!',
+    };
+  },
 };
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -23,4 +28,18 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+.top-header{
+  position: relative;
+  width:100%;
+  height:400px;
+  background-image: url('./assets/top/pc.jpg');
+  background-size:cover;
+  .intro-text {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+  }
+}
+
 </style>

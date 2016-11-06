@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Editor from '../components/edit/Editor'; // don't use .vue extension
+import Editor from '../views/edit/Editor'; // don't use .vue extension
 import Hello from '../components/Hello'; // don't use .vue extension
 import TestView from '../views/testView'; // don't use .vue extension
 
