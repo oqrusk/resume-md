@@ -1,8 +1,5 @@
-<template>
-  <div id="editor">
-    <textarea :value="input" @input="update"></textarea>
-    <div v-html="compiledMarkdown"></div>
-  </div>
+<template lang="pug" src="./Editor.pug">
+
 </template>
 
 <script>
@@ -19,14 +16,11 @@ export default {
   self: this,
   computed: {
     compiledMarkdown() {
-      console.log(this);
       return marked(this.input, { sanitize: true });
     },
   },
   methods: {
     update: _.debounce(function (e) {
-      console.log(e);
-      console.log(this.input);
       this.input = e.target.value;
     }, 300),
   },
@@ -45,7 +39,7 @@ export default {
   textarea, #editor div {
     display: inline-block;
     width: 49%;
-    height: 100%;
+    height: 1000%;
     vertical-align: top;
     box-sizing: border-box;
     padding: 0 20px;
@@ -54,7 +48,7 @@ export default {
   textarea {
     border: none;
     border-right: 1px solid #ccc;
-    resize: none;
+    resize: vertical;
     outline: none;
     background-color: #f6f6f6;
     font-size: 14px;
@@ -62,6 +56,9 @@ export default {
     padding: 20px;
   }
 
+  #preview {
+    text-align: left;
+  }
   code {
     color: #f66;
   }

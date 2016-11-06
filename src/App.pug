@@ -1,0 +1,14 @@
+#app
+  nav.navbar.navbar-default
+    .container-fluid
+      .navbar-header
+        a.nabvar-brand(href='') MyMdResume
+      ul.nav.navbar-nav
+        li
+          router-link(to="/hello") Go to hello
+        li
+          router-link(to="/edit") Go to Edit
+        li
+          router-link(to="/top") Go to top
+        li
+  router-view.view

@@ -1,9 +1,8 @@
-<template>
-  <div class="test-view">
+<template lang="pug">
+  .test-view
     <template>
       sssssssssss
     </template>
-  </div>
 </template>
 
 <script>
