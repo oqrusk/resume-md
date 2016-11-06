@@ -5,10 +5,24 @@
 import marked from 'marked';
 import _ from 'lodash';
 
+const renderer = new marked.Renderer();
+
+renderer.heading = (text, level) => {
+  const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+  const ret = `<h${level}><a name="${escapedText}" class="anchor" href="#${escapedText}"><span class="header-link"></span></a>${text}</h${level}>`;
+  return ret;
+};
+
+renderer.paragraph = (text) => {
+  console.log(text);
+  // const escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+  return text;
+};
+
 // localStorage persistence
 const STORAGE_KEY = 'md-resume-text';
 const MIN_ROW = 10;
-const defaultText = '# bjljbljhgHello!! ';
+const defaultText = '# Hello! ';
 
 const resumeStorage = {
   fetch: () => {
@@ -30,7 +44,7 @@ export default {
   },
   computed: {
     compiledMarkdown() {
-      return marked(this.input, { sanitize: true });
+      return marked(this.input, { sanitize: true, renderer });
     },
     rowSize() {
       const num = this.input.split('\n').length;

@@ -1,11 +1,10 @@
 #app.container-fluid
   nav.navbar.navbar-default
     .container-fluid
-      .navbar-header: a.nabvar-brand(href='') MyMdResume
+      .navbar-header: a.nabvar-brand(href='/top') MyMdResume
       ul.nav.navbar-nav
-        li: router-link(to="/hello") Go to hello
-        li: router-link(to="/edit") Go to Edit
-        li: router-link(to="/top") Go to top
+        li: router-link(to="/edit") Edit
+        li: router-link(to="/") mine
   router-view.view
   footer.footer: .container-fluid
     p.text-muted.text-right Copyright © 2016 oqrusk All Rights Reserved.
