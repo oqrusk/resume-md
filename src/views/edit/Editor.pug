@@ -1,6 +1,6 @@
-.row
-  .col-sm6
+.row#edit
+  .col-sm-6
     #editor
-      textarea#input(:value="input" @input="update")
-  .col-sm6
+      textarea#input(":value"="input" "@input"="update" ":rows"="rowSize")
+  .col-sm-6
     #preview(v-html="compiledMarkdown")

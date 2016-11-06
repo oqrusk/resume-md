@@ -7,16 +7,15 @@ import _ from 'lodash';
 
 // localStorage persistence
 const STORAGE_KEY = 'md-resume-text';
+const MIN_ROW = 10;
 const defaultText = '# bjljbljhgHello!! ';
 
 const resumeStorage = {
   fetch: () => {
     const resumeText = localStorage.getItem(STORAGE_KEY) || defaultText;
-    console.log(`fetch: ${resumeText}`);
     return resumeText;
   },
   save: (resumeText) => {
-    console.log(`save: ${resumeText}`);
     localStorage.setItem(STORAGE_KEY, resumeText);
   },
 };
@@ -26,39 +25,44 @@ export default {
   data() {
     return {
       input: resumeStorage.fetch(),
+      rows: 1,
     };
   },
   computed: {
     compiledMarkdown() {
-      console.log(`compiled: ${this.input}`);
       return marked(this.input, { sanitize: true });
+    },
+    rowSize() {
+      const num = this.input.split('\n').length;
+      return (num > MIN_ROW) ? num : MIN_ROW;
     },
   },
   methods: {
     update: _.debounce(function (e) {
       this.input = e.target.value;
-      console.log(`update: ${this.input}`);
       resumeStorage.save(this.input);
     }, 300),
   },
 };
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-  html, body, #editor {
+  html, body, #edit-area {
     margin: 0;
     height: 100%;
     font-family: 'Helvetica Neue', Arial, sans-serif;
     color: #333;
   }
 
-  textarea, #editor div {
+  textarea, #edit-area div {
     display: inline-block;
     width: 49%;
-    height: 1000%;
+    height: 100%;
     vertical-align: top;
     box-sizing: border-box;
+    /*resize: none;*/
     padding: 0 20px;
   }
 
@@ -68,6 +72,7 @@ export default {
     resize: vertical;
     outline: none;
     background-color: #f6f6f6;
+    width: 100%;
     font-size: 14px;
     font-family: 'Monaco', courier, monospace;
     padding: 20px;
@@ -75,8 +80,8 @@ export default {
 
   #preview {
     text-align: left;
-  }
-  code {
-    color: #f66;
+    code {
+      color: #f66;
+    }
   }
 </style>
