@@ -1,9 +1,12 @@
-<template lang="pug" src="./Hello.pug">
+<template lang="pug" src="./Top.pug">
 </template>
 
 <script>
+import Clock from '../../components/Clock';
+
 export default {
   name: 'hello',
+  components: { Clock },
   data() {
     return {
       msg: 'マークダウンでレジュメを書こう',

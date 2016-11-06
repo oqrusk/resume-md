@@ -2,13 +2,13 @@
 </template>
 
 <script>
-import Hello from './components/Hello';
+import Top from './views/top/Top';
 import Editor from './views/edit/Editor';
 
 export default {
   name: 'app',
   components: {
-    Hello,
+    Top,
     Editor,
   },
   data() {
